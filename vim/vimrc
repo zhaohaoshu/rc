@@ -1,3 +1,9 @@
+"https://stackoverflow.com/questions/1031396/how-to-share-one-vimrc-file-among-multiple-clients
+"let $localcloudpath = $MYVIMRC . '_cloud'
+"let $cloudurl = '!curl https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -o '. $localcloudpath
+"silent execute $cloudurl
+"source $localcloudpath
+
 "source $VIMRUNTIME/vimrc_example.vim
 
 syntax on
