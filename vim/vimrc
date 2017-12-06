@@ -1,7 +1,7 @@
 "https://stackoverflow.com/questions/1031396/how-to-share-one-vimrc-file-among-multiple-clients
 "let $localcloudpath = $MYVIMRC . '_cloud'
 ""let $cloudurl = '!curl https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -s -H "Cache-Control: max-age=0" -o ' . $localcloudpath
-""let $cloudurl = '!powershell -command invoke-webrequest -uri https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -header @{"Cache-Control"="max-age=0"} -outfile ' . $localcloudpath
+""let $cloudurl = '!powershell -command invoke-webrequest -uri https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -header @{\"Cache-Control\"=\"max-age=0\"} -outfile ' . $localcloudpath
 "silent execute $cloudurl
 "source $localcloudpath
 
