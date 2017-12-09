@@ -28,7 +28,7 @@ set number
 set nocompatible
 set nobackup
 
-set backspace=indent,eol,start
+set backspace="indent,eol,start"
 
 " http://stackoverflow.com/questions/7622564/vim-auto-indent-private-keyword
 set cinoptions+=g0
@@ -112,3 +112,12 @@ map \eh :e %<.h<CR>
 map \ec :e %<.cpp<CR>
 map \sh :sp %<.h<CR>
 map \sc :sp %<.cpp<CR>
+
+function! ToggleMouse()
+    if (&mouse == 'a')
+        set mouse= 
+    else
+        set mouse=a
+    endif
+endfunction
+map <F12> :call ToggleMouse()<CR>
