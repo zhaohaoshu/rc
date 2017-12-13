@@ -28,7 +28,7 @@ set number
 set nocompatible
 set nobackup
 
-set backspace="indent,eol,start"
+set backspace=indent,eol,start
 
 " http://stackoverflow.com/questions/7622564/vim-auto-indent-private-keyword
 set cinoptions+=g0
