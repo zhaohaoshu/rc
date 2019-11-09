@@ -1,9 +1,19 @@
-"https://stackoverflow.com/questions/1031396/how-to-share-one-vimrc-file-among-multiple-clients
-"let $localcloudpath = $MYVIMRC . '_cloud'
-""let $cloudurl = '!curl https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -s -H "Cache-Control: max-age=0" -o ' . $localcloudpath
-""let $cloudurl = '!powershell -command invoke-webrequest -uri https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -header @{\"Cache-Control\"=\"max-age=0\"} -outfile ' . $localcloudpath
-"silent execute $cloudurl
-"source $localcloudpath
+" "https://stackoverflow.com/questions/1031396/how-to-share-one-vimrc-file-among-multiple-clients
+" let $local_rc_path = $MYVIMRC . '_cloud'
+" if has('win32')
+"     let $cmd_download_rc = '!powershell -command invoke-webrequest -uri https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -header @{\"Cache-Control\"=\"max-age=0\"} -outfile ' . $local_rc_path
+"     let $cmd_rm_rc = '!del ' . $local_rc_path
+" else
+"     let $cmd_download_rc = '!curl https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -s -H "Cache-Control: max-age=0" -o ' . $local_rc_path
+"     let $cmd_rm_rc = '!rm ' . $local_rc_path
+" endif
+" command DlRc silent execute $cmd_download_rc
+" command RmRc silent execute $cmd_rm_rc
+" if !filereadable($local_rc_path)
+"     DlRc
+" endif
+" source $local_rc_path
+
 
 
 "source $VIMRUNTIME/vimrc_example.vim
