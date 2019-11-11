@@ -1,135 +1,29 @@
-" "https://stackoverflow.com/questions/1031396/how-to-share-one-vimrc-file-among-multiple-clients
-" let $local_rc_path = $MYVIMRC . '_cloud'
-" if has('win32')
-"     let $cmd_download_rc = '!powershell -command invoke-webrequest -uri https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -header @{\"Cache-Control\"=\"max-age=0\"} -outfile ' . $local_rc_path
-"     let $cmd_rm_rc = '!del ' . $local_rc_path
-" else
-"     let $cmd_download_rc = '!curl https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc -s -H "Cache-Control: max-age=0" -o ' . $local_rc_path
-"     let $cmd_rm_rc = '!rm ' . $local_rc_path
-" endif
-" command DlRc silent execute $cmd_download_rc
-" command RmRc silent execute $cmd_rm_rc
-" if !filereadable($local_rc_path)
-"     DlRc
-" endif
-" source $local_rc_path
+"https://stackoverflow.com/questions/1031396/how-to-share-one-vimrc-file-among-multiple-clients
 
+let $url_rc = 'https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc'
+let $url_rc_source = 'https://raw.githubusercontent.com/zhaohaoshu/rc/master/vim/vimrc_source'
+let $local_path_rc_source = $MYVIMRC . '_source'
 
-
-"source $VIMRUNTIME/vimrc_example.vim
-
-vunmap <C-X>
-
-syntax on
-set hlsearch
-set incsearch
-set autoindent
-
-set guifont=Courier\ New:h14
-set guioptions+=b
-
-set expandtab
-set shiftwidth=4
-set tabstop=4
-
-set textwidth=0
-
-set laststatus=2
-set number
-"source D:\Program Files (x86)\Vim\_vimrc
-set nocompatible
-set nobackup
-
-set backspace=indent,eol,start
-
-" http://stackoverflow.com/questions/7622564/vim-auto-indent-private-keyword
-set cinoptions+=g0
-" http://stackoverflow.com/questions/2549019/how-to-avoid-namespace-content-indentation-in-vim
-set cinoptions+=N-s
-" http://superuser.com/questions/783233/vim-switch-statement-indenting
-set cinoptions+=:0
-" https://stackoverflow.com/questions/28217118/vim-indents-c-c-functions-badly-when-the-type-and-name-are-in-different-lines
-set cinoptions+=t0
-
-" https://stackoverflow.com/questions/2280030/how-to-stop-line-breaking-in-vim
-set formatoptions=l
-
-" http://vim.wikia.com/wiki/Open_file_under_cursor
-set isfname-=:
-set isfname-=]
-
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  "autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  " Also don't do it when the mark is in the first line, that is the default
-  " position when opening a file.
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-
-  augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
-set notimeout
-set ttimeout
-set ttimeoutlen=0
-
-nmap <C-H> :tabmove -1<CR>
-nmap <C-L> :tabmove +1<CR>
-
-" http://vim.wikia.com/wiki/Copy_filename_to_clipboard
-" Convert slashes to backslashes for Windows.
 if has('win32')
-  nmap \cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-  nmap \cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-
-  " This will copy the path in 8.3 short format, for DOS and Windows 9x
-  nmap \c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+    let $cmd_download_rc = '!powershell -command invoke-webrequest -uri ' . $url_rc . ' -header @{\"Cache-Control\"=\"max-age=0\"} -outfile ' . $MYVIMRC
+    let $cmd_download_rc_source = '!powershell -command invoke-webrequest -uri ' . $url_rc_source . ' -header @{\"Cache-Control\"=\"max-age=0\"} -outfile ' . $local_path_rc_source
 else
-  nmap \cs :let @*=expand("%")<CR>
-  nmap \cl :let @*=expand("%:p")<CR>
+    let $cmd_download_rc = '!curl ' . $url_rc . ' -s -H "Cache-Control: max-age=0" -o ' . $MYVIMRC
+    let $cmd_download_rc_source = '!curl ' . $url_rc_source . ' -s -H "Cache-Control: max-age=0" -o ' . $local_path_rc_source
 endif
 
-nmap \ya magg"+yG`azz
-map \y "+y
-map \p "+p
-map \P "+P
-
-map \th :tabnew %<.h<CR>
-map \tc :tabnew %<.cpp<CR>
-map \tE :tabnew %:h<CR>
-map \eh :e %<.h<CR>
-map \ec :e %<.cpp<CR>
-map \sh :sp %<.h<CR>
-map \sc :sp %<.cpp<CR>
-
-function! ToggleMouse()
-    if (&mouse == 'a')
-        set mouse= 
-    else
-        set mouse=a
-    endif
+function! DownloadRc()
+    silent execute $cmd_download_rc
+    silent execute $cmd_download_rc_source
 endfunction
-map <F12> :call ToggleMouse()<CR>
+
+command DlRc call DownloadRc()
+
+if !filereadable($local_path_rc_source)
+    DlRc
+endif
+
+if filereadable($local_path_rc_source)
+    source $local_path_rc_source
+endif
+

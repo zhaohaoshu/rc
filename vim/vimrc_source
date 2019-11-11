@@ -1,0 +1,120 @@
+"source $VIMRUNTIME/vimrc_example.vim
+
+vunmap <C-X>
+
+syntax on
+set hlsearch
+set incsearch
+set autoindent
+
+set guifont=Courier\ New:h14
+set guioptions+=b
+
+set expandtab
+set shiftwidth=4
+set tabstop=4
+
+set textwidth=0
+
+set laststatus=2
+set number
+"source D:\Program Files (x86)\Vim\_vimrc
+set nocompatible
+set nobackup
+
+set backspace=indent,eol,start
+
+" http://stackoverflow.com/questions/7622564/vim-auto-indent-private-keyword
+set cinoptions+=g0
+" http://stackoverflow.com/questions/2549019/how-to-avoid-namespace-content-indentation-in-vim
+set cinoptions+=N-s
+" http://superuser.com/questions/783233/vim-switch-statement-indenting
+set cinoptions+=:0
+" https://stackoverflow.com/questions/28217118/vim-indents-c-c-functions-badly-when-the-type-and-name-are-in-different-lines
+set cinoptions+=t0
+
+" https://stackoverflow.com/questions/2280030/how-to-stop-line-breaking-in-vim
+set formatoptions=l
+
+set wildmenu
+
+" http://vim.wikia.com/wiki/Open_file_under_cursor
+set isfname-=:
+set isfname-=]
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  "autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  " Also don't do it when the mark is in the first line, that is the default
+  " position when opening a file.
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+set notimeout
+set ttimeout
+set ttimeoutlen=0
+
+nmap <C-H> :tabmove -1<CR>
+nmap <C-L> :tabmove +1<CR>
+
+" http://vim.wikia.com/wiki/Copy_filename_to_clipboard
+" Convert slashes to backslashes for Windows.
+if has('win32')
+  nmap \cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+  nmap \cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+
+  " This will copy the path in 8.3 short format, for DOS and Windows 9x
+  nmap \c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+else
+  nmap \cs :let @*=expand("%")<CR>
+  nmap \cl :let @*=expand("%:p")<CR>
+endif
+
+nmap \ya magg"+yG`azz
+map \y "+y
+map \p "+p
+map \P "+P
+
+map \th :tabnew %<.h<CR>
+map \tc :tabnew %<.cpp<CR>
+map \tE :tabnew %:h<CR>
+map \eh :e %<.h<CR>
+map \ec :e %<.cpp<CR>
+map \sh :sp %<.h<CR>
+map \sc :sp %<.cpp<CR>
+
+function! ToggleMouse()
+    if (&mouse == 'a')
+        set mouse= 
+    else
+        set mouse=a
+    endif
+endfunction
+map <F12> :call ToggleMouse()<CR>
+
