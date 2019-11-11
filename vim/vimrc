@@ -13,8 +13,8 @@ else
 endif
 
 function! DownloadRc()
-    silent execute $cmd_download_rc
-    silent execute $cmd_download_rc_source
+    silent! execute $cmd_download_rc
+    silent! execute $cmd_download_rc_source
 endfunction
 
 command DlRc call DownloadRc()
