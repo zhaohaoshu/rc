@@ -17,7 +17,7 @@ function! DownloadRc()
     silent! execute $cmd_download_rc_source
 endfunction
 
-command DlRc call DownloadRc()
+command! DlRc call DownloadRc()
 
 if !filereadable($local_path_rc_source)
     DlRc
