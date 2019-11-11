@@ -1,6 +1,6 @@
 "source $VIMRUNTIME/vimrc_example.vim
 
-vunmap <C-X>
+silent! vunmap <C-X>
 
 syntax on
 set hlsearch
