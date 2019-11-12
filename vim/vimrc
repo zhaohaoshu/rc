@@ -15,6 +15,7 @@ endif
 function! DownloadRc()
     silent! execute $cmd_download_rc
     silent! execute $cmd_download_rc_source
+    redraw
 endfunction
 
 command! DlRc call DownloadRc()
