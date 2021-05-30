@@ -17,6 +17,9 @@ set tabstop=4
 set textwidth=0
 
 set laststatus=2
+set statusline=%f\ %h%w%m%r%y\ %=Line:%l/%L\ Col:%c/%{strlen(getline('.'))}\ VCol:%v/%{strdisplaywidth(getline('.'))}\ Char:%b(0x%B)
+" set statusline+=Byte:%o/%{line2byte('$')+len(getline('$'))}
+
 set number
 "source D:\Program Files (x86)\Vim\_vimrc
 set nocompatible
