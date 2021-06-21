@@ -55,7 +55,7 @@ set isfname-=:
 set isfname-=]
 
 " Only do this part when compiled with support for autocommands.
-if has("autocmd")
+if has('autocmd')
 
   " Enable file type detection.
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
@@ -76,8 +76,8 @@ if has("autocmd")
   " Also don't do it when the mark is in the first line, that is the default
   " position when opening a file.
   autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
+    \ if line('''"') > 1 && line('''"') <= line('$') |
+    \   exe 'normal! g`"' |
     \ endif
 
   augroup END
@@ -86,7 +86,7 @@ else
 
   set autoindent		" always set autoindenting on
 
-endif " has("autocmd")
+endif " has('autocmd')
 
 set notimeout
 set ttimeout
