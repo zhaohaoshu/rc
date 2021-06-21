@@ -19,7 +19,7 @@ set textwidth=0
 set laststatus=2
 set statusline=%f\ %h%w%m%r%y
 set statusline+=\ %{&fileencoding}
-set statusline+=\ %{&bomb?\"[BOM]\":\"\"}
+set statusline+=\ %{&bomb?'[BOM]':''}
 set statusline+=%=Line:%l/%L
 set statusline+=\ Col:%c/%{strlen(getline('.'))}
 set statusline+=\ VCol:%v/%{strdisplaywidth(getline('.'))}
@@ -98,17 +98,17 @@ nmap <C-L> :tabmove +1<CR>
 " http://vim.wikia.com/wiki/Copy_filename_to_clipboard
 " Convert slashes to backslashes for Windows.
 if has('win32')
-  nmap \cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-  nmap \cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+  nmap \cs :let @*=substitute(expand('%'), '/', '\', 'g')<CR>
+  nmap \cl :let @*=substitute(expand('%:p'), '/', '\', 'g')<CR>
 
   " This will copy the path in 8.3 short format, for DOS and Windows 9x
-  nmap \c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+  nmap \c8 :let @*=substitute(expand('%:p:8'), '/', '\', 'g')<CR>
 else
-  nmap \cs :let @*=expand("%")<CR>
-  nmap \cl :let @*=expand("%:p")<CR>
+  nmap \cs :let @*=expand('%')<CR>
+  nmap \cl :let @*=expand('%:p')<CR>
 endif
 
-nmap \ya magg"+yG`azz
+nmap \ya :%y+<CR>
 map \y "+y
 map \p "+p
 map \P "+P
@@ -130,3 +130,17 @@ function! ToggleMouse()
 endfunction
 map <F12> :call ToggleMouse()<CR>
 
+function! MoveWindow(d)
+    let bufn=winbufnr(0)
+    let tabn=tabpagenr()
+    let pos=getcurpos()
+    execute a:d
+    let newtabn=tabpagenr()
+    execute 'sbuffer' . bufn
+    execute 'tabnext' . tabn
+    q!
+    execute 'tabnext' . newtabn
+    call setpos('.', pos)
+endfunction
+map <C-J> :call MoveWindow('tabNext')<CR>
+map <C-K> :call MoveWindow('tabnext')<CR>
