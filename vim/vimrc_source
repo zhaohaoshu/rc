@@ -138,7 +138,10 @@ function! MoveWindow(d)
     let newtabn=tabpagenr()
     execute 'sbuffer' . bufn
     execute 'tabnext' . tabn
-    q!
+    if (winnr('$') == 1 && tabpagenr() < newtabn)
+        let newtabn=newtabn-1
+    endif
+    q
     execute 'tabnext' . newtabn
     call setpos('.', pos)
 endfunction
