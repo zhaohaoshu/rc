@@ -82,10 +82,6 @@ if has('autocmd')
 
   augroup END
 
-else
-
-  set autoindent		" always set autoindenting on
-
 endif " has('autocmd')
 
 set notimeout
@@ -122,8 +118,8 @@ map \sh :sp %<.h<CR>
 map \sc :sp %<.cpp<CR>
 
 function! ToggleMouse()
-    if (&mouse == 'a')
-        set mouse= 
+    if &mouse != ''
+        set mouse=
     else
         set mouse=a
     endif
@@ -131,19 +127,25 @@ endfunction
 map <F12> :call ToggleMouse()<CR>
 
 function! MoveWindow(d)
-    let bufn=winbufnr(0)
-    let tabn=tabpagenr()
-    let pos=getcurpos()
-    execute a:d
-    let newtabn=tabpagenr()
-    execute 'sbuffer' . bufn
+    let bufn = winbufnr(0)
+    let tabn = tabpagenr()
+    let pos = getcurpos()
+    if a:d == 'right'
+        tabnext
+        let loc = 'leftabove'
+    else
+        tabNext
+        let loc = 'rightbelow'
+    endif
+    let newtabn = tabpagenr()
+    execute 'vertical '. loc . ' sbuffer' . bufn
     execute 'tabnext' . tabn
-    if (winnr('$') == 1 && tabpagenr() < newtabn)
-        let newtabn=newtabn-1
+    if winnr('$') == 1 && tabpagenr() < newtabn
+        let newtabn = newtabn-1
     endif
     q
     execute 'tabnext' . newtabn
     call setpos('.', pos)
 endfunction
-map <C-J> :call MoveWindow('tabNext')<CR>
-map <C-K> :call MoveWindow('tabnext')<CR>
+map <C-J> :call MoveWindow('left')<CR>
+map <C-K> :call MoveWindow('right')<CR>
