@@ -141,7 +141,7 @@ function! MoveWindow(d)
     execute 'vertical '. loc . ' sbuffer' . bufn
     execute 'tabnext' . tabn
     if winnr('$') == 1 && tabpagenr() < newtabn
-        let newtabn = newtabn-1
+        let newtabn = newtabn - 1
     endif
     q
     execute 'tabnext' . newtabn
