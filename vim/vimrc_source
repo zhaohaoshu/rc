@@ -1,4 +1,6 @@
 "source $VIMRUNTIME/vimrc_example.vim
+"source D:\Program Files (x86)\Vim\_vimrc
+"set nocompatible
 
 silent! vunmap <C-X>
 
@@ -6,6 +8,12 @@ syntax on
 set hlsearch
 set incsearch
 set autoindent
+set backspace=indent,eol,start
+set number
+set nobackup
+
+" https://stackoverflow.com/questions/4668623/show-count-of-matches-in-vim
+set shortmess-=S
 
 set guifont=Courier\ New:h14
 set guioptions+=b
@@ -25,16 +33,6 @@ set statusline+=\ Col:%c/%{strlen(getline('.'))}
 set statusline+=\ VCol:%v/%{strdisplaywidth(getline('.'))}
 set statusline+=\ Char:%b(0x%B)
 " set statusline+=Byte:%o/%{line2byte('$')+len(getline('$'))}
-
-" https://stackoverflow.com/questions/4668623/show-count-of-matches-in-vim
-set shortmess-=S
-
-set number
-"source D:\Program Files (x86)\Vim\_vimrc
-set nocompatible
-set nobackup
-
-set backspace=indent,eol,start
 
 " http://stackoverflow.com/questions/7622564/vim-auto-indent-private-keyword
 set cinoptions+=g0
