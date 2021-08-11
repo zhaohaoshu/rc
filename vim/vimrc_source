@@ -26,6 +26,9 @@ set statusline+=\ VCol:%v/%{strdisplaywidth(getline('.'))}
 set statusline+=\ Char:%b(0x%B)
 " set statusline+=Byte:%o/%{line2byte('$')+len(getline('$'))}
 
+" https://stackoverflow.com/questions/4668623/show-count-of-matches-in-vim
+set shortmess-=S
+
 set number
 "source D:\Program Files (x86)\Vim\_vimrc
 set nocompatible
