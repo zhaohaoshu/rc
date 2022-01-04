@@ -15,7 +15,7 @@ set nobackup
 " https://stackoverflow.com/questions/4668623/show-count-of-matches-in-vim
 set shortmess-=S
 
-set guifont=Courier\ New:h14
+set guifont=Monospace\ 14,Courier\ New:h14
 set guioptions+=b
 
 set expandtab
