@@ -11,6 +11,7 @@ set autoindent
 set backspace=indent,eol,start
 set number
 set nobackup
+set autoread
 
 " https://stackoverflow.com/questions/4668623/show-count-of-matches-in-vim
 set shortmess-=S
