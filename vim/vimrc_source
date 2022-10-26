@@ -16,6 +16,9 @@ set autoread
 " https://stackoverflow.com/questions/4668623/show-count-of-matches-in-vim
 set shortmess-=S
 
+" https://vi.stackexchange.com/questions/31613/how-to-show-where-the-word-is-found-when-using-auto-complete-if-its-the-only
+set completeopt+=menuone
+
 set guifont=Monospace\ 14,Courier\ New:h14
 set guioptions+=b
 
