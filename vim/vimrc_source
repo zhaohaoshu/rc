@@ -21,6 +21,7 @@ set completeopt+=menuone
 
 set guifont=Monospace\ 14,Courier\ New:h14
 set guioptions+=b
+set guioptions-=T
 
 set expandtab
 set shiftwidth=4
