@@ -118,8 +118,8 @@ map \p "+p
 map \P "+P
 
 map \tE :tabnew %:h<CR>
-map \tdc :tabnew %:h/../lib/%:t:r.cpp<CR>
-map \tdh :tabnew %:h/../inc/%:t:r.h<CR>
+map \tdc :tabnew %:h:h/lib/%:t:r.cpp<CR>
+map \tdh :tabnew %:h:h/inc/%:t:r.h<CR>
 map \th :tabnew %:r.h<CR>
 map \tc :tabnew %:r.cpp<CR>
 map \eh :e %:r.h<CR>
