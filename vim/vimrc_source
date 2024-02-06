@@ -117,13 +117,15 @@ map \y "+y
 map \p "+p
 map \P "+P
 
-map \th :tabnew %<.h<CR>
-map \tc :tabnew %<.cpp<CR>
 map \tE :tabnew %:h<CR>
-map \eh :e %<.h<CR>
-map \ec :e %<.cpp<CR>
-map \sh :sp %<.h<CR>
-map \sc :sp %<.cpp<CR>
+map \tdc :tabnew %:h/../lib/%:t:r.cpp
+map \tdh :tabnew %:h/../inc/%:t:r.h
+map \th :tabnew %:r.h<CR>
+map \tc :tabnew %:r.cpp<CR>
+map \eh :e %:r.h<CR>
+map \ec :e %:r.cpp<CR>
+map \sh :sp %:r.h<CR>
+map \sc :sp %:r.cpp<CR>
 
 function! ToggleMouse()
     if &mouse != ''
